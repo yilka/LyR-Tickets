@@ -25,7 +25,9 @@ namespace LyR_Tickets
                 Console.WriteLine(" ");
                 Console.WriteLine("2.Ver lista de tickets");
                 Console.WriteLine(" ");
-                Console.WriteLine("3.Salir");
+                Console.WriteLine("3.Editar ticket");
+                Console.WriteLine(" ");
+                Console.WriteLine("4.Salir");
                 Console.WriteLine(" ");
                 Console.WriteLine("Por favor selecione una opción: ");
                 int choice = Convert.ToInt32(Console.ReadLine());
@@ -41,6 +43,10 @@ namespace LyR_Tickets
                         break;
 
                     case 3:
+                        TicketApp.EditTicket(db);
+                        break;
+
+                    case 4:
                         running = false;
                         break;
 

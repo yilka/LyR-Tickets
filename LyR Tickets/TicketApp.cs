@@ -42,6 +42,12 @@ namespace LyR_Tickets
             Console.WriteLine($"Ticket creado exitosamente (Número de ticket: {newTicket.ID_Ticket})");
             Console.WriteLine(" ");
         }
+
+        public void AddTicket()
+        {
+            throw new NotImplementedException();
+        }
+
         public static void ViewTicket(DB db)
         {
             Console.WriteLine("Todos los tickets:");
@@ -50,6 +56,59 @@ namespace LyR_Tickets
                 Service service = db.Servicios.Find(s => s.ID_Servicio == ticket.Servicio);
                 Console.WriteLine($"Ticket ID: {ticket.ID_Ticket},Fecha: {ticket.Fecha} ,Cliente: {ticket.Nombre_Cliente}, Teléfono: {ticket.Telefono_Cliente}, Servicio: {service.Servicio}, Comentarios: {ticket.Comentarios}");
             }
+        }
+
+        public object ViewTicket()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void EditTicket(DB db)
+        {
+            Console.WriteLine("Ingrese el ID del ticket que quiere modificar:");
+            int ID_ticket = Convert.ToInt32(Console.ReadLine());
+
+            Ticket tickettoedit = db.Tickets.Find(t => t.ID_Ticket == ID_ticket);
+            if(tickettoedit == null)
+            {
+                Console.WriteLine(" ");
+                Console.WriteLine("No se ha encontrado el ticket");
+                return;
+            }
+            Console.WriteLine(" ");
+            Console.WriteLine($"Ticket ID a editar: {tickettoedit.ID_Ticket}");
+            Console.WriteLine(" ");
+            Console.WriteLine($"Nombre de cliente: {tickettoedit.Nombre_Cliente}");
+            Console.WriteLine(" ");
+            Console.WriteLine($"Telefono: {tickettoedit.Telefono_Cliente}");
+            Console.WriteLine(" ");
+            Console.WriteLine($"Servicio: {db.Servicios.Find(s => s.ID_Servicio == tickettoedit.Servicio)?.Servicio}");
+            Console.WriteLine(" ");
+            Console.WriteLine($"Comentarios: {tickettoedit.Comentarios}");
+            Console.WriteLine(" ");
+
+
+
+            Console.WriteLine("Modifique el nombre del cliente (dejar en blanco si quiere mantener el actual): ");
+            Console.WriteLine(" ");
+            string newnombrecliente = Console.ReadLine();
+            if (!string.IsNullOrEmpty(newnombrecliente))
+            {
+                tickettoedit.Nombre_Cliente = newnombrecliente;
+            }
+
+
+            Console.WriteLine("Modifique el teléfono del cliente (dejar en blanco si quiere mantener el actual): ");
+            Console.WriteLine(" ");
+            string newtelcliente = Console.ReadLine();
+            if (!string.IsNullOrEmpty(newtelcliente))
+            {
+                tickettoedit.Telefono_Cliente = newtelcliente;
+            }
+
+            Console.WriteLine("Su ticket ha sido actualizado exitosamente");
+            Console.WriteLine(" ");
+
         }
     }
 }
